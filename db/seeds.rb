@@ -1,5 +1,6 @@
 puts "Destroying records..."
 Garden.destroy_all if Rails.env.development?
+Tag.destroy_all if Rails.env.development?
 
 
 puts "Creating gardens..."
@@ -27,3 +28,14 @@ Plant.create!(
   garden: little_garden
 )
 puts "Plants created!"
+
+puts "Tag creation..."
+names = %w[Fruit\ tree Cactus Greasy\ plant Flower Ferns Conifers]
+
+names.each do |name|
+  Tag.create!(name: name)
+end
+puts "Tags created!"
+
+PlantTag.create!(tag: Tag.first, plant: Plant.first)
+
